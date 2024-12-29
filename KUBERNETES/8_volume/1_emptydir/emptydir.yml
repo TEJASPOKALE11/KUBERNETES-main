@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: mypod2
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: dev
+  template:
+    metadata:
+      labels:
+        app: dev
+    spec:
+      containers:
+        - image: nginx
+          name: mycont
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: myvolume
+              mountPath: /usr/share/nginx/html/
+        - image: nginx
+          name: mycont1
+          ports:
+            - containerPort: 90
+          volumeMounts:
+            - name: myvolume
+              mountPath: /usr/share/nginx/html/
+      volumes:
+        - name: myvolume
+          emptyDir: {}
+

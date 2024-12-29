@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: myrc2
+spec:
+  replicas: 3
+  selector:
+     env: testing
+  template:
+     metadata:
+      labels:
+       env: testing
+     spec:
+      containers:
+       - name: nginxconatiner
+         image: nginx
+         ports:
+          - containerPort: 80

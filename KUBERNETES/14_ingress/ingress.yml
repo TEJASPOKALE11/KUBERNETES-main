@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1  
+kind: Ingress
+metadata:
+  name: myingress
+spec:
+  rules:
+   - host: tujanena.com
+     http:
+      paths:
+       - path: /
+         pathType: Prefix
+         backend:
+          service:
+            name: myservice1
+            port:
+              number: 80
+   - host: example.com
+     http:
+      paths:
+       - path: /
+         pathType: Prefix
+         backend:
+          service:
+            name: myservice2
+            port:
+              number: 80

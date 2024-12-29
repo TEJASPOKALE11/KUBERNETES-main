@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata: 
+  name: myjob
+spec: 
+  schedule: "*/3 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+           labels: 
+              app: myapp
+        spec: 
+          restartPolicy: OnFailure
+          containers:
+             - name: mycont
+               image: luksa/batch-job      

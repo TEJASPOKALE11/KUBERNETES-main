@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: mypod2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dev
+  template:
+    metadata:
+      labels:
+        app: dev
+    spec:
+      containers:
+        - image: nginx
+          name: mycont
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: myvolume
+              mountPath: /usr/share/nginx/html/
+      volumes:
+        - name: myvolume
+          nfs:
+            server: fs-0f038416c4eb31fa4.efs.us-east-1.amazonaws.com
+            path: /test
